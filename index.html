@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Sayangku ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #ffe4e6, #fecdd3, #fda4af);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Kelopak/Hati Berjatuhan */
+        .heart-fall {
+            position: absolute;
+            color: #f43f5e;
+            font-size: 20px;
+            animation: fall linear infinite;
+            stroke: white;
+            opacity: 0.75;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Kartu Utama */
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            z-index: 10;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            transform: scale(0.9);
+            animation: muncul 1s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes muncul {
+            to { transform: scale(1); }
+        }
+
+        .heart-icon {
+            font-size: 50px;
+            color: #e11d48;
+            animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            color: #9f1239;
+            margin: 15px 0 10px 0;
+            font-size: 24px;
+        }
+
+        /* Animasi Ketik */
+        .typewriter {
+            font-size: 16px;
+            color: #4c0519;
+            min-height: 50px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Tombol Romantis */
+        .btn {
+            background: linear-gradient(135deg, #f43f5e, #be123c);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(225, 29, 72, 0.4);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(225, 29, 72, 0.6);
+        }
+
+        /* Pop-up Surat Rahasia */
+        .surat-box {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            border-left: 5px solid #e11d48;
+            text-align: left;
+            color: #4c0519;
+            font-size: 14px;
+            animation: fadeIn 0.5s forwards;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="heart-icon">❤️</div>
+        <h1>Love U Istri Abg Tercinta, Sayang!</h1> 
+        
+        <div class="typewriter" id="typing-text"></div>
+
+        <button class="btn" onclick="bukaSurat()">Klik dong, Ada Pesan...</button>
+
+        <div class="surat-box" id="surat">
+            <strong>Dari Suamimu, Jamal:</strong><br>
+            "LDM ini cuma masalah jarak dan angka-angka di peta, tapi hati kita tetap satu. Makasih ya udah selalu sabar dan jadi penyemangat hidup aku. Jaga kesehatan di sana, jangan telat makan. Gak sabar buat cepat-cepat ketemu lagi. <i>I love you more each day!</i>"
+        </div>
+    </div>
+
+    <script>
+        // Efek Hujan Hati Berjatuhan secara Acak
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-fall');
+            // Variasi bentuk hati/bunga romantis
+            const symbols = ['❤️', '💖', '🌸', '💕', '✨'];
+            heart.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            heart.style.fontSize = Math.random() * 15 + 15 + "px";
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 300);
+
+        // Efek Tulisan Mengetik Otomatis
+        const txt = "Meskipun kita lagi jauh-jauhan, ingetin diri kamu terus ya kalau ada seseorang di sini yang selalu kangen sama kamu tiap detik...";
+        let index = 0;
+        function typeWriter() {
+            if (index < txt.length) {
+                document.getElementById("typing-text").innerHTML += txt.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50); // Kecepatan ngetik (ms)
+            }
+        }
+        // Jalankan efek ketik pas web dibuka
+        window.onload = typeWriter;
+
+        // Fungsi klik tombol untuk buka surat rahasia
+        function bukaSurat() {
+            const box = document.getElementById("surat");
+            if(box.style.display === "block") {
+                box.style.display = "none";
+            } else {
+                box.style.display = "block";
+                // Auto scroll ke bawah biar kelihatan semua
+                setTimeout(() => {
+                    box.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+    </script>
+</body>
+</html>
